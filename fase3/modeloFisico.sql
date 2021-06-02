@@ -5,19 +5,19 @@ SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0;
 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION';
 
 -- -----------------------------------------------------
--- Schema mydb
+-- Schema solar
 -- -----------------------------------------------------
 
 -- -----------------------------------------------------
--- Schema mydb
+-- Schema solar
 -- -----------------------------------------------------
-CREATE SCHEMA IF NOT EXISTS `mydb` DEFAULT CHARACTER SET utf8 ;
-USE `mydb` ;
+CREATE SCHEMA IF NOT EXISTS `solar` DEFAULT CHARACTER SET utf8 ;
+USE `solar` ;
 
 -- -----------------------------------------------------
--- Table `mydb`.`Utilizador`
+-- Table `solar`.`Utilizador`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `mydb`.`Utilizador` (
+CREATE TABLE IF NOT EXISTS `solar`.`Utilizador` (
   `username` VARCHAR(45) NOT NULL,
   `nome` VARCHAR(100) NOT NULL,
   `password` VARCHAR(45) NOT NULL,
@@ -28,9 +28,9 @@ ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `mydb`.`Evento`
+-- Table `solar`.`Evento`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `mydb`.`Evento` (
+CREATE TABLE IF NOT EXISTS `solar`.`Evento` (
   `idEvento` INT NOT NULL,
   `data` DATETIME NOT NULL,
   `descricao` TEXT(1000) NOT NULL,
@@ -40,9 +40,9 @@ ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `mydb`.`Localidade`
+-- Table `solar`.`Localidade`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `mydb`.`Localidade` (
+CREATE TABLE IF NOT EXISTS `solar`.`Localidade` (
   `idLocalidade` INT NOT NULL,
   `latitude` DOUBLE NOT NULL,
   `longitude` DOUBLE NOT NULL,
@@ -54,9 +54,9 @@ ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `mydb`.`Meteorologia`
+-- Table `solar`.`Meteorologia`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `mydb`.`Meteorologia` (
+CREATE TABLE IF NOT EXISTS `solar`.`Meteorologia` (
   `data` DATE NOT NULL,
   `idLocalidade` INT NOT NULL,
   `weatherType` VARCHAR(8) NOT NULL,
@@ -68,16 +68,16 @@ CREATE TABLE IF NOT EXISTS `mydb`.`Meteorologia` (
   INDEX `fk_Meteorologia_Localidade_idx` (`idLocalidade` ASC) VISIBLE,
   CONSTRAINT `fk_Meteorologia_Localidade`
     FOREIGN KEY (`idLocalidade`)
-    REFERENCES `mydb`.`Localidade` (`idLocalidade`)
+    REFERENCES `solar`.`Localidade` (`idLocalidade`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `mydb`.`Lembrete`
+-- Table `solar`.`Lembrete`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `mydb`.`Lembrete` (
+CREATE TABLE IF NOT EXISTS `solar`.`Lembrete` (
   `idLembrete` INT NOT NULL,
   `dataHora` DATETIME NOT NULL,
   `Utilizador_username` VARCHAR(45) NOT NULL,
@@ -87,21 +87,21 @@ CREATE TABLE IF NOT EXISTS `mydb`.`Lembrete` (
   INDEX `fk_Lembrete_Evento1_idx` (`Evento_idEvento` ASC) VISIBLE,
   CONSTRAINT `fk_Lembrete_Utilizador1`
     FOREIGN KEY (`Utilizador_username`)
-    REFERENCES `mydb`.`Utilizador` (`username`)
+    REFERENCES `solar`.`Utilizador` (`username`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
   CONSTRAINT `fk_Lembrete_Evento1`
     FOREIGN KEY (`Evento_idEvento`)
-    REFERENCES `mydb`.`Evento` (`idEvento`)
+    REFERENCES `solar`.`Evento` (`idEvento`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `mydb`.`Alerta`
+-- Table `solar`.`Alerta`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `mydb`.`Alerta` (
+CREATE TABLE IF NOT EXISTS `solar`.`Alerta` (
   `idAlerta` INT NOT NULL,
   `dataHora` DATETIME NOT NULL,
   `descricao` TEXT NOT NULL,
@@ -112,9 +112,9 @@ ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `mydb`.`Habitacao`
+-- Table `solar`.`Habitacao`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `mydb`.`Habitacao` (
+CREATE TABLE IF NOT EXISTS `solar`.`Habitacao` (
   `idHabitacao` INT NOT NULL,
   `morada` VARCHAR(150) NOT NULL,
   `latitude` DOUBLE NOT NULL,
@@ -128,21 +128,21 @@ CREATE TABLE IF NOT EXISTS `mydb`.`Habitacao` (
   INDEX `fk_Habitacao_Utilizador1_idx` (`Utilizador_username` ASC) VISIBLE,
   CONSTRAINT `fk_Habitacao_Localidade1`
     FOREIGN KEY (`Localidade_idLocalidade`)
-    REFERENCES `mydb`.`Localidade` (`idLocalidade`)
+    REFERENCES `solar`.`Localidade` (`idLocalidade`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
   CONSTRAINT `fk_Habitacao_Utilizador1`
     FOREIGN KEY (`Utilizador_username`)
-    REFERENCES `mydb`.`Utilizador` (`username`)
+    REFERENCES `solar`.`Utilizador` (`username`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `mydb`.`ConsumoEnergetico`
+-- Table `solar`.`ConsumoEnergetico`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `mydb`.`ConsumoEnergetico` (
+CREATE TABLE IF NOT EXISTS `solar`.`ConsumoEnergetico` (
   `data` DATE NOT NULL,
   `Habitacao_idHabitacao` INT NOT NULL,
   `consumo` DOUBLE NOT NULL,
@@ -150,35 +150,35 @@ CREATE TABLE IF NOT EXISTS `mydb`.`ConsumoEnergetico` (
   INDEX `fk_ConsumoEnergetico_Habitacao1_idx` (`Habitacao_idHabitacao` ASC) VISIBLE,
   CONSTRAINT `fk_ConsumoEnergetico_Habitacao1`
     FOREIGN KEY (`Habitacao_idHabitacao`)
-    REFERENCES `mydb`.`Habitacao` (`idHabitacao`)
+    REFERENCES `solar`.`Habitacao` (`idHabitacao`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `mydb`.`Painel`
+-- Table `solar`.`Painel`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `mydb`.`Painel` (
+CREATE TABLE IF NOT EXISTS `solar`.`Painel` (
   `idPainel` INT NOT NULL,
   `Habitacao_idHabitacao` INT NOT NULL,
   `producaoPrevistaHora` DOUBLE NOT NULL,
   `modelo` VARCHAR(45) NOT NULL,
   `estado` INT NOT NULL,
-  PRIMARY KEY (`idPainel`, `Habitacao_idHabitacao`),
+  PRIMARY KEY (`idPainel`),
   INDEX `fk_Painel_Habitacao1_idx` (`Habitacao_idHabitacao` ASC) VISIBLE,
   CONSTRAINT `fk_Painel_Habitacao1`
     FOREIGN KEY (`Habitacao_idHabitacao`)
-    REFERENCES `mydb`.`Habitacao` (`idHabitacao`)
+    REFERENCES `solar`.`Habitacao` (`idHabitacao`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `mydb`.`ProducaoEnergetica`
+-- Table `solar`.`ProducaoEnergetica`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `mydb`.`ProducaoEnergetica` (
+CREATE TABLE IF NOT EXISTS `solar`.`ProducaoEnergetica` (
   `data` DATE NOT NULL,
   `Painel_idPainel` INT NOT NULL,
   `producao` DOUBLE NOT NULL,
@@ -186,30 +186,30 @@ CREATE TABLE IF NOT EXISTS `mydb`.`ProducaoEnergetica` (
   INDEX `fk_ProducaoEnergetica_Painel1_idx` (`Painel_idPainel` ASC) VISIBLE,
   CONSTRAINT `fk_ProducaoEnergetica_Painel1`
     FOREIGN KEY (`Painel_idPainel`)
-    REFERENCES `mydb`.`Painel` (`idPainel`)
+    REFERENCES `solar`.`Painel` (`idPainel`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `mydb`.`Funcionario`
+-- Table `solar`.`Funcionario`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `mydb`.`Funcionario` (
+CREATE TABLE IF NOT EXISTS `solar`.`Funcionario` (
   `Utilizador_username` VARCHAR(45) NOT NULL,
   PRIMARY KEY (`Utilizador_username`),
   CONSTRAINT `fk_table1_Utilizador1`
     FOREIGN KEY (`Utilizador_username`)
-    REFERENCES `mydb`.`Utilizador` (`username`)
+    REFERENCES `solar`.`Utilizador` (`username`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `mydb`.`Manutencao`
+-- Table `solar`.`Manutencao`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `mydb`.`Manutencao` (
+CREATE TABLE IF NOT EXISTS `solar`.`Manutencao` (
   `Funcionario_username` VARCHAR(45) NOT NULL,
   `Habitacao_idHabitacao` INT NOT NULL,
   `data` DATETIME NOT NULL,
@@ -217,43 +217,43 @@ CREATE TABLE IF NOT EXISTS `mydb`.`Manutencao` (
   INDEX `fk_Manutencao_Habitacao1_idx` (`Habitacao_idHabitacao` ASC) VISIBLE,
   CONSTRAINT `fk_Manutencao_Funcionario1`
     FOREIGN KEY (`Funcionario_username`)
-    REFERENCES `mydb`.`Funcionario` (`Utilizador_username`)
+    REFERENCES `solar`.`Funcionario` (`Utilizador_username`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
   CONSTRAINT `fk_Manutencao_Habitacao1`
     FOREIGN KEY (`Habitacao_idHabitacao`)
-    REFERENCES `mydb`.`Habitacao` (`idHabitacao`)
+    REFERENCES `solar`.`Habitacao` (`idHabitacao`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `mydb`.`Avaria`
+-- Table `solar`.`Avaria`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `mydb`.`Avaria` (
+CREATE TABLE IF NOT EXISTS `solar`.`Avaria` (
   `Habitacao_idHabitacao` INT NOT NULL,
   `dataHora` DATETIME NOT NULL,
   INDEX `fk_Avaria_Habitacao1_idx` (`Habitacao_idHabitacao` ASC) VISIBLE,
   PRIMARY KEY (`dataHora`),
   CONSTRAINT `fk_Avaria_Habitacao1`
     FOREIGN KEY (`Habitacao_idHabitacao`)
-    REFERENCES `mydb`.`Habitacao` (`idHabitacao`)
+    REFERENCES `solar`.`Habitacao` (`idHabitacao`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `mydb`.`AlertasUtilizador`
+-- Table `solar`.`AlertasUtilizador`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `mydb`.`AlertasUtilizador` (
+CREATE TABLE IF NOT EXISTS `solar`.`AlertasUtilizador` (
   `Tipo` INT NOT NULL,
   `Utilizador_username` VARCHAR(45) NOT NULL,
   PRIMARY KEY (`Utilizador_username`, `Tipo`),
   CONSTRAINT `fk_table1_Utilizador2`
     FOREIGN KEY (`Utilizador_username`)
-    REFERENCES `mydb`.`Utilizador` (`username`)
+    REFERENCES `solar`.`Utilizador` (`username`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
