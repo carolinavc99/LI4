@@ -1,0 +1,35 @@
+@page "/dash-funcionario"
+
+<h1>Dashboard do Funcionário</h1>
+
+
+<h3>Lista de Eventos</h3>
+
+<input placeholder="Novo Evento" @bind="newEvento"/>
+<button @onclick="AddEvento">Adicionar Evento</button>
+
+<ul>
+    @foreach (var evento in eventos)
+    {
+        <li>
+            <input type="checkbox" id="evento" name="evento" checked>
+            <label for="evento">@evento</label>
+        </li>
+    }
+</ul>
+
+@code
+{    
+    private List<string> eventos = new();
+    private string newEvento;
+
+    private void AddEvento()
+    {
+        if (!string.IsNullOrWhiteSpace(newEvento))
+        {
+            eventos.Add(newEvento);
+            newEvento = string.Empty;
+        }
+    }
+
+}

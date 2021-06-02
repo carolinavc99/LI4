@@ -1,0 +1,15 @@
+@page "/dash-utilizador"
+
+<h1>Dashboard do Utilizador</h1>
+
+<button class="btn btn-primary" @onclick="Counter">@counter</button>
+
+@code
+{
+    private int counter = 0;
+
+    private void Counter()
+    {
+        counter++;
+    }
+}
