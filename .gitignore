@@ -4,6 +4,8 @@
 
 *.cache
 
+*.ttf
+*.woff
 
 ##----Below is StackOverflow gitignore, totally overkill, but do not touch plis----##
 
