@@ -6,6 +6,8 @@
 
 *.ttf
 *.woff
+*.eot
+*otf
 
 ##----Below is StackOverflow gitignore, totally overkill, but do not touch plis----##
 
