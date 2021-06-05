@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using MvcSolar.Data;
 
 namespace MvcSolar.Migrations
 {
     [DbContext(typeof(MvcSolarContext))]
-    partial class MvcSolarContextModelSnapshot : ModelSnapshot
+    [Migration("20210605220733_UtilizadoresCreate")]
+    partial class UtilizadoresCreate
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
