@@ -1,0 +1,88 @@
+﻿{
+   "CodeGenerationMode": 0,
+   "ContextClassName": "SolarContext",
+   "ContextNamespace": null,
+   "DefaultDacpacSchema": null,
+   "FilterSchemas": false,
+   "IncludeConnectionString": false,
+   "ModelNamespace": null,
+   "OutputContextPath": null,
+   "OutputPath": "Data\/Tables\/",
+   "ProjectRootNamespace": "solar",
+   "Schemas": null,
+   "SelectedHandlebarsLanguage": 0,
+   "SelectedToBeGenerated": 0,
+   "Tables": [
+      {
+         "Name": "[solar].[alerta]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[solar].[alertasutilizador]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[solar].[avaria]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[solar].[consumoenergetico]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[solar].[evento]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[solar].[funcionario]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[solar].[habitacao]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[solar].[lembrete]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[solar].[localidade]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[solar].[manutencao]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[solar].[meteorologia]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[solar].[painel]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[solar].[producaoenergetica]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[solar].[utilizador]",
+         "ObjectType": 0
+      }
+   ],
+   "UiHint": "desktop-imdru55.solar.dbo",
+   "UseBoolPropertiesWithoutDefaultSql": false,
+   "UseDatabaseNames": true,
+   "UseDbContextSplitting": false,
+   "UseFluentApiOnly": true,
+   "UseHandleBars": false,
+   "UseInflector": false,
+   "UseLegacyPluralizer": false,
+   "UseNoConstructor": false,
+   "UseNoNavigations": false,
+   "UseNoObjectFilter": false,
+   "UseNodaTime": false,
+   "UseNullableReferences": false,
+   "UseSchemaFolders": false,
+   "UseSpatial": false
+}
