@@ -15,17 +15,20 @@ namespace MvcSolar.Data
 
         }
 
-        public DbSet<MvcSolar.Models.Evento> Evento { get; set; }
-
-        public DbSet<MvcSolar.Models.Utilizador> Utilizador { get; set; }
-
-        public DbSet<MvcSolar.Models.Painel> Painel { get; set; }
-
-        public DbSet<MvcSolar.Models.Habitacao> Habitacao { get; set; }
-
-        public DbSet<MvcSolar.Models.Localidade> Localidade { get; set; }
-
-        public DbSet<MvcSolar.Models.Meteorologia> Meteorologia { get; set; }
+        public DbSet<MvcSolar.Models.Alerta> Alertas { get; set; }
+        public DbSet<MvcSolar.Models.AlertasUtilizador> AlertasUtilizadores { get; set; }
+        public DbSet<MvcSolar.Models.Avaria> Avarias { get; set; }
+        public DbSet<MvcSolar.Models.ConsumoEnergetico> ConsumosEnergeticos { get; set; }
+        public DbSet<MvcSolar.Models.Evento> Eventos { get; set; }
+        public DbSet<MvcSolar.Models.Utilizador> Utilizadores { get; set; }
+        public DbSet<MvcSolar.Models.Funcionario> Funcionarios { get; set; }
+        public DbSet<MvcSolar.Models.Habitacao> Habitacoes { get; set; }
+        public DbSet<MvcSolar.Models.Lembrete> Lembretes { get; set; }
+        public DbSet<MvcSolar.Models.Localidade> Localidades { get; set; }
+        public DbSet<MvcSolar.Models.Manutencao> Manutencoes { get; set; }
+        public DbSet<MvcSolar.Models.Meteorologia> Meteorologias { get; set; }
+        public DbSet<MvcSolar.Models.Painel> Paineis { get; set; }
+        public DbSet<MvcSolar.Models.ProducaoEnergetica> ProducoesEnergeticas { get; set; }
 
         //
 
@@ -36,17 +39,19 @@ namespace MvcSolar.Data
              ou seja iincluir só o utilizador o EF ia gerar Habitação também porque o utilizador precisa dela 
             */
 
-            modelBuilder.Entity<Alerta>().ToTable("Alertas");
-            modelBuilder.Entity<ConsumoEnergetico>().ToTable("Consumos Energéticos");
-            modelBuilder.Entity<Evento>().ToTable("Eventos");
-            modelBuilder.Entity<Funcionario>().ToTable("Funcionários");
-            modelBuilder.Entity<Habitacao>().ToTable("Habitações");
-            modelBuilder.Entity<Lembrete>().ToTable("Lembretes");
-            modelBuilder.Entity<Localidade>().ToTable("Localidades");
-            modelBuilder.Entity<Manutencao>().ToTable("Manutenções");
+            modelBuilder.Entity<Alerta>().ToTable("Alerta");
+            modelBuilder.Entity<AlertasUtilizador>().ToTable("AlertasUtilizador");
+            modelBuilder.Entity<Avaria>().ToTable("Avaria");
+            modelBuilder.Entity<ConsumoEnergetico>().ToTable("Consumo Energético");
+            modelBuilder.Entity<Evento>().ToTable("Evento");
+            modelBuilder.Entity<Funcionario>().ToTable("Funcionário");
+            modelBuilder.Entity<Habitacao>().ToTable("Habitação");
+            modelBuilder.Entity<Lembrete>().ToTable("Lembrete");
+            modelBuilder.Entity<Localidade>().ToTable("Localidade");
+            modelBuilder.Entity<Manutencao>().ToTable("Manutenção");
             modelBuilder.Entity<Meteorologia>().ToTable("Meteorologia");
-            modelBuilder.Entity<Painel>().ToTable("Painéis");
-            modelBuilder.Entity<Utilizador>().ToTable("Utilizadores");
+            modelBuilder.Entity<Painel>().ToTable("Painel");
+            modelBuilder.Entity<Utilizador>().ToTable("Utilizador");
         }
     }
 }

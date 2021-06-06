@@ -9,6 +9,9 @@ namespace MvcSolar.Data
     {
         public static void Initialize(MvcSolarContext context)
         {
+            context.Database.EnsureCreated();
+
+            
         }
     }
 }

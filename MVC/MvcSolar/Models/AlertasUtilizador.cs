@@ -11,11 +11,11 @@ namespace MvcSolar.Models
     public class AlertasUtilizador
     {
 
-        public int utilizador_id;
+        public int UtilizadorID;
 
-        public Tipo tipo;
+        public Tipo Tipo;
 
-        public Utilizador utilizador;
+        public Utilizador Utilizador;
 
         
 
