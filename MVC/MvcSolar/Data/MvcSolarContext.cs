@@ -10,6 +10,8 @@ namespace MvcSolar.Data
 {
     public class MvcSolarContext : DbContext
     {
+       
+
         public MvcSolarContext (DbContextOptions<MvcSolarContext> options) : base(options)
         {
 

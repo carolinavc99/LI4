@@ -31,6 +31,7 @@ namespace MvcSolar
             services.AddDatabaseDeveloperPageExceptionFilter();
 
             services.AddControllersWithViews();
+            
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -55,9 +56,14 @@ namespace MvcSolar
 
             app.UseEndpoints(endpoints =>
             {
+                endpoints.MapControllerRoute(name: "Scheduler",
+                pattern: "Scheduler/{id?}",
+                defaults: new { controller = "Scheduler", action = "id" });
+
                 endpoints.MapControllerRoute(
                     name: "default",
                     pattern: "{controller=Home}/{action=Welcome}/{id?}"); // routing format witht he defaults defined
+                    
             });
         }
     }

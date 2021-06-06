@@ -17,8 +17,10 @@ namespace MvcSolar
         {
             var host = CreateHostBuilder(args).Build();
 
+
             CreateDbIfNotExists(host);
 
+            
             host.Run();
         }
 
