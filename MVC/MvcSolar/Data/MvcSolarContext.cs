@@ -30,7 +30,6 @@ namespace MvcSolar.Data
         public DbSet<MvcSolar.Models.Painel> Paineis { get; set; }
         public DbSet<MvcSolar.Models.ProducaoEnergetica> ProducoesEnergeticas { get; set; }
 
-        //
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -38,7 +37,7 @@ namespace MvcSolar.Data
              Algumas destas tabelas podem ser excluídas - o EF cria tabelas para todas as entidades que são referenciadas
              ou seja iincluir só o utilizador o EF ia gerar Habitação também porque o utilizador precisa dela 
             */
-
+            
             modelBuilder.Entity<Alerta>().ToTable("Alerta");
             modelBuilder.Entity<AlertasUtilizador>().ToTable("AlertasUtilizador");
             modelBuilder.Entity<Avaria>().ToTable("Avaria");
@@ -52,6 +51,7 @@ namespace MvcSolar.Data
             modelBuilder.Entity<Meteorologia>().ToTable("Meteorologia");
             modelBuilder.Entity<Painel>().ToTable("Painel");
             modelBuilder.Entity<Utilizador>().ToTable("Utilizador");
+            modelBuilder.Entity<ProducaoEnergetica>().ToTable("Produções Energéticas");
         }
     }
 }

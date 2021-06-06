@@ -28,7 +28,7 @@ namespace MvcSolar
             services.AddDbContext<MvcSolarContext>(options =>
                     options.UseSqlServer(Configuration.GetConnectionString("MvcSolarContext")));
 
-            //services.AddDatabaseDeveloperPageExceptionFilter();
+            services.AddDatabaseDeveloperPageExceptionFilter();
 
             services.AddControllersWithViews();
         }
