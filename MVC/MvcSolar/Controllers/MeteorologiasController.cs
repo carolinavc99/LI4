@@ -20,8 +20,33 @@ namespace MvcSolar.Controllers
         }
 
         // GET: Meteorologias
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(string sortOrder, string searchString)
         {
+            ViewData["NameSortParm"] = String.IsNullOrEmpty(sortOrder) ? "name_desc" : "";
+            ViewData["DateSortParm"] = sortOrder == "Date" ? "data_desc" : "Date";
+            ViewData["CurrentFilter"] = searchString;
+
+            var meteorologias = from s in _context.Meteorologias
+                                select s;
+            if (!String.IsNullOrEmpty(searchString))
+            {
+                meteorologias = meteorologias.Where(s => s.SkyCondition.Contains(searchString));
+            }
+            switch (sortOrder)
+            {
+                case "nome_desc":
+                    meteorologias = meteorologias.OrderByDescending(s => s.WeatherType);
+                    break;
+                case "Data":
+                    meteorologias = meteorologias.OrderBy(s => s.SkyCondition);
+                    break;
+                case "data_desc":
+                    meteorologias = meteorologias.OrderByDescending(s => s.SkyCondition);
+                    break;
+                default:
+                    meteorologias = meteorologias.OrderBy(s => s.WeatherType);
+                    break;
+            }
             return View(await _context.Meteorologias.ToListAsync());
         }
 

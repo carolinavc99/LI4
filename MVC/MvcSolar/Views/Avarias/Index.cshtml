@@ -4,16 +4,16 @@
     ViewData["Title"] = "Index";
 }
 
-<h1>Index</h1>
+<h1>Avarias</h1>
 
 <p>
-    <a asp-action="Create">Create New</a>
+    <a asp-action="Create">Criar Nova</a>
 </p>
 <table class="table">
     <thead>
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.Data)
+                <a asp-action="Index" asp-route-sortOrder="@ViewData["DateSortParm"]">@Html.DisplayNameFor(model => model.Data)</a>
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.Habitacao)
@@ -31,9 +31,9 @@
                 @Html.DisplayFor(modelItem => item.Habitacao.HabitacaoID)
             </td>
             <td>
-                <a asp-action="Edit" asp-route-id="@item.AvariaID">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.AvariaID">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.AvariaID">Delete</a>
+                <a asp-action="Edit" asp-route-id="@item.AvariaID">Editar</a> |
+                <a asp-action="Details" asp-route-id="@item.AvariaID">Detalhes</a> |
+                <a asp-action="Delete" asp-route-id="@item.AvariaID">Apagar</a>
             </td>
         </tr>
 }

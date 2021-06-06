@@ -4,11 +4,22 @@
     ViewData["Title"] = "Index";
 }
 
-<h1>Index</h1>
+<h1>Painéis</h1>
 
 <p>
-    <a asp-action="Create">Create New</a>
+    <a asp-action="Create">Criar Novo</a>
 </p>
+
+<form asp-action="Index" method="get">
+    <div class="form-actions no-color">
+        <p>
+            Pesquisar por modelo: <input type="text" name="SearchString" value="@ViewData["CurrentFilter"]" />
+            <input type="submit" value="Procurar" class="btn btn-default" /> |
+            <a asp-action="Index">Voltar</a>
+        </p>
+    </div>
+</form>
+
 <table class="table">
     <thead>
         <tr>
@@ -16,10 +27,10 @@
                 @Html.DisplayNameFor(model => model.ProducaoPrevistaHora)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Modelo)
+                <a asp-action="Index" asp-route-sortOrder="@ViewData["NameSortParm"]">@Html.DisplayNameFor(model => model.Modelo)</a>
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Estado)
+                <a asp-action="Index" asp-route-sortOrder="@ViewData["DateSortParm"]"> @Html.DisplayNameFor(model => model.Estado)</a>
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.Habitacao)

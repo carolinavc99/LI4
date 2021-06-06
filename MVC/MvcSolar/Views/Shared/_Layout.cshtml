@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>@ViewData["Title"] - SOL:AR</title>
+    <title>SOL:AR</title>
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" />
 </head>
@@ -11,7 +11,7 @@
     <header>
         <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
             <div class="container">
-                <a class="navbar-brand" asp-controller="Home" asp-action="Welcome">SOL:AR</a>
+                <a class="navbar-brand" asp-controller="Funcionario" asp-action="Index">Área do Funcionário</a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
                         aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
@@ -19,52 +19,25 @@
                 <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
                     <ul class="navbar-nav flex-grow-1">
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Dashboard">Dashboard</a>
-                        </li>
-                        <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-controller="Calendair" asp-action="Index">Calendário</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Funcionario" asp-action="Index">Funcionários</a>
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Avarias" asp-action="Index">Avarias</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Alertas" asp-action="Index">Alertas</a>
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Eventos" asp-action="Index">Eventos</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="AlertasUtilizadores" asp-action="Index">AlertasUtilizador</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Avarias" asp-action="Index">Avaria</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="ConsumoEnergeticos" asp-action="Index">ConsumoEnergetico</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Eventos" asp-action="Index">Evento</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Habitacoes" asp-action="Index">Habitacao</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Lembretes" asp-action="Index">Lembrete</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Localidades" asp-action="Index">Localidade</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Manutencoes" asp-action="Index">Manutencao</a>
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Manutencoes" asp-action="Index">Manutenções</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-controller="Meteorologias" asp-action="Index">Meteorologia</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Paineis" asp-action="Index">Painel</a>
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Paineis" asp-action="Index">Painéis</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="ProducaoEnergeticas" asp-action="Index">ProducaoEnergetica</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Utilizadores" asp-action="Index">Utilizador</a>
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Utilizadores" asp-action="Index">Utilizadores</a>
                         </li>
                     </ul>
                 </div>
@@ -79,7 +52,7 @@
 
     <footer class="border-top footer text-muted">
         <div class="container">
-            &copy; 2021 - SOL:AR - <a asp-area="" asp-controller="Home" asp-action="Welcome">Home</a>
+            &copy; 2021 - SOL:AR - <a asp-area="" asp-controller="Funcionario" asp-action="Index">Área do Funcionário</a>
         </div>
     </footer>
     <script src="~/lib/jquery/dist/jquery.min.js"></script>

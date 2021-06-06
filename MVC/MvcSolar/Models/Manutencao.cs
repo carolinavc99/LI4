@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using System.ComponentModel.DataAnnotations;
 
 namespace MvcSolar.Models
 {
@@ -11,6 +12,8 @@ namespace MvcSolar.Models
         public int ManutencaoID { get; set; }
         public int FuncionarioID { get; set; }
         public int HabitacaoID { get; set; }
+
+        [DataType(DataType.Date)]
         public DateTime Data { get; set; }
 
         // nav props

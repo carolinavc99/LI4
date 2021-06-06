@@ -20,9 +20,36 @@ namespace MvcSolar.Controllers
         }
 
         // GET: Paineis
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(string sortOrder, string searchString)
         {
             var mvcSolarContext = _context.Paineis.Include(p => p.Habitacao);
+
+            ViewData["NameSortParm"] = String.IsNullOrEmpty(sortOrder) ? "name_desc" : "";
+            ViewData["DateSortParm"] = sortOrder == "Date" ? "data_desc" : "Date";
+            ViewData["CurrentFilter"] = searchString;
+
+            var paineis = from s in _context.Paineis
+                          select s;
+            if (!String.IsNullOrEmpty(searchString))
+            {
+                paineis = paineis.Where(s => s.Modelo.Contains(searchString));
+            }
+            switch (sortOrder)
+            {
+                case "nome_desc":
+                    paineis = paineis.OrderByDescending(s => s.Modelo);
+                    break;
+                case "Data":
+                    paineis = paineis.OrderBy(s => s.Estado);
+                    break;
+                case "data_desc":
+                    paineis = paineis.OrderByDescending(s => s.Modelo);
+                    break;
+                default:
+                    paineis = paineis.OrderBy(s => s.Estado);
+                    break;
+            }
+
             return View(await mvcSolarContext.ToListAsync());
         }
 

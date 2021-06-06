@@ -20,10 +20,24 @@ namespace MvcSolar.Controllers
         }
 
         // GET: Manutencoes
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(string sortOrder)
         {
             var mvcSolarContext = _context.Manutencoes.Include(m => m.Funcionario).Include(m => m.Habitacao);
-            return View(await mvcSolarContext.ToListAsync());
+
+            ViewData["DateSortParm"] = sortOrder;
+
+            var manutencoes = from s in _context.Manutencoes
+                          select s;
+            switch (sortOrder)
+            {
+                case "Data":
+                    manutencoes = manutencoes.OrderBy(s => s.Data);
+                    break;
+                default:
+                    manutencoes = manutencoes.OrderByDescending(s => s.Data);
+                    break;
+            }
+            return View(await manutencoes.AsNoTracking().ToListAsync());
         }
 
         // GET: Manutencoes/Details/5

@@ -20,10 +20,24 @@ namespace MvcSolar.Controllers
         }
 
         // GET: Avarias
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(string sortOrder)
         {
             var mvcSolarContext = _context.Avarias.Include(a => a.Habitacao);
-            return View(await mvcSolarContext.ToListAsync());
+
+            ViewData["DateSortParm"] = sortOrder;
+
+            var avarias = from s in _context.Avarias
+                          select s;
+            switch (sortOrder)
+            {
+                case "Data":
+                    avarias = avarias.OrderBy(s => s.Data);
+                    break;
+                default:
+                    avarias = avarias.OrderByDescending(s => s.Data);
+                    break;
+            }
+            return View(await avarias.AsNoTracking().ToListAsync());
         }
 
         // GET: Avarias/Details/5

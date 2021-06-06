@@ -20,8 +20,34 @@ namespace MvcSolar.Controllers
         }
 
         // GET: Utilizadores
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(string sortOrder, string searchString)
         {
+            ViewData["NameSortParm"] = String.IsNullOrEmpty(sortOrder) ? "name_desc" : "";
+            ViewData["DateSortParm"] = sortOrder == "Date" ? "data_desc" : "Date";
+            ViewData["CurrentFilter"] = searchString;
+
+            var users = from s in _context.Utilizadores
+                          select s;
+            if (!String.IsNullOrEmpty(searchString))
+            {
+                users = users.Where(s => s.Nome.Contains(searchString));
+            }
+            switch (sortOrder)
+            {
+                case "nome_desc":
+                    users = users.OrderByDescending(s => s.Nome);
+                    break;
+                case "Data":
+                    users = users.OrderBy(s => s.Email);
+                    break;
+                case "data_desc":
+                    users = users.OrderByDescending(s => s.Email);
+                    break;
+                default:
+                    users = users.OrderBy(s => s.Nome);
+                    break;
+            }
+
             return View(await _context.Utilizadores.ToListAsync());
         }
 

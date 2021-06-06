@@ -4,19 +4,19 @@
     ViewData["Title"] = "Index";
 }
 
-<h1>Index</h1>
+<h1>Meteorologia</h1>
 
 <p>
-    <a asp-action="Create">Create New</a>
+    <a asp-action="Create">Criar Nova</a>
 </p>
 <table class="table">
     <thead>
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.WeatherType)
+                <a asp-action="Index" asp-route-sortOrder="@ViewData["NameSortParm"]">@Html.DisplayNameFor(model => model.WeatherType)</a>
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.SkyCondition)
+                <a asp-action="Index" asp-route-sortOrder="@ViewData["DateSortParm"]"> @Html.DisplayNameFor(model => model.SkyCondition)</a>
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.ProbPrecipitacao)
@@ -49,9 +49,9 @@
                 @Html.DisplayFor(modelItem => item.Sunset)
             </td>
             <td>
-                <a asp-action="Edit" asp-route-id="@item.MeteorologiaID">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.MeteorologiaID">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.MeteorologiaID">Delete</a>
+                <a asp-action="Edit" asp-route-id="@item.MeteorologiaID">Editar</a> |
+                <a asp-action="Details" asp-route-id="@item.MeteorologiaID">Detalhes</a> |
+                <a asp-action="Delete" asp-route-id="@item.MeteorologiaID">Apagar</a>
             </td>
         </tr>
 }

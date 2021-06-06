@@ -62,7 +62,7 @@ namespace MvcSolar
 
                 endpoints.MapControllerRoute(
                     name: "default",
-                    pattern: "{controller=Home}/{action=Welcome}/{id?}"); // routing format witht he defaults defined
+                    pattern: "{controller=Funcionario}/{action=Index}/{id?}"); // routing format witht he defaults defined
                     
             });
         }
