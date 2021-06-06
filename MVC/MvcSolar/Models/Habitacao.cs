@@ -20,5 +20,8 @@ namespace MvcSolar.Models
         public Dictionary<DateTime,ConsumoEnergetico> Consumos { get; set; }
 
 
+
     }
+
+  
 }

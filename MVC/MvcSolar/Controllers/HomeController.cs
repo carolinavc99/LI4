@@ -36,5 +36,7 @@ namespace MvcSolar.Controllers
         {
             return View();
         }
+
+
     }
 }
