@@ -1,0 +1,53 @@
+﻿@model MvcSolar.Models.Meteorologia
+
+@{
+    ViewData["Title"] = "Create";
+}
+
+<h1>Create</h1>
+
+<h4>Meteorologia</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Create">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="WeatherType" class="control-label"></label>
+                <input asp-for="WeatherType" class="form-control" />
+                <span asp-validation-for="WeatherType" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="SkyCondition" class="control-label"></label>
+                <input asp-for="SkyCondition" class="form-control" />
+                <span asp-validation-for="SkyCondition" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="ProbPrecipitacao" class="control-label"></label>
+                <input asp-for="ProbPrecipitacao" class="form-control" />
+                <span asp-validation-for="ProbPrecipitacao" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Sunrise" class="control-label"></label>
+                <input asp-for="Sunrise" class="form-control" />
+                <span asp-validation-for="Sunrise" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Sunset" class="control-label"></label>
+                <input asp-for="Sunset" class="form-control" />
+                <span asp-validation-for="Sunset" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

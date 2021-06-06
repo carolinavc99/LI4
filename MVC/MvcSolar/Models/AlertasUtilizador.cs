@@ -10,14 +10,16 @@ namespace MvcSolar.Models
 
     public class AlertasUtilizador
     {
+        // props
+        public int AlertasUtilizadorID { get; set; }
+        public int UtilizadorID { get; set; }
 
-        public int UtilizadorID;
+        public Tipo Tipo { get; set; }
 
-        public Tipo Tipo;
+        // nav props
+        public Utilizador Utilizador { get; set; }
 
-        public Utilizador Utilizador;
 
-        
 
     }
 }

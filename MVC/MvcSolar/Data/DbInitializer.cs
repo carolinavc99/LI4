@@ -37,7 +37,7 @@ namespace MvcSolar.Data
             }
             var alertas = new Alerta[]
             {
-                new Alerta{alertaId=1,DataHora=DateTime.Parse("01/01/01"),Descricao="desc1",Sugestoes="sugs1",Tipo=Tipo.Tempestade}
+                new Alerta{DataHora=DateTime.Parse("01/01/01"),Descricao="desc1",Sugestoes="sugs1",Tipo=Tipo.Tempestade}
             };
             foreach (Alerta a in alertas)
             {
@@ -52,7 +52,7 @@ namespace MvcSolar.Data
             }
             var localidades = new Localidade[]
             {
-                new Localidade{LocalidadeID=1,Latitude=10,Longitude=10,Nome="Gualtar",Distrito="Braga",Concelho="Braga"}
+                new Localidade{Latitude=10,Longitude=10,Nome="Gualtar",Distrito="Braga",Concelho="Braga"}
             };
             foreach ( Localidade l in localidades)
             {
@@ -68,7 +68,7 @@ namespace MvcSolar.Data
             }
             var meteorologias = new Meteorologia[]
             {
-                new Meteorologia{MeteorologiaID=1,WeatherType="weathertype1",SkyCondition="skycond1",ProbPrecipitacao=8.0,Sunrise=DateTime.Parse("01/01/2001")}
+                new Meteorologia{WeatherType="weathertype1",SkyCondition="skycond1",ProbPrecipitacao=8.0,Sunrise=DateTime.Parse("01/01/2001")}
             };
             foreach (Meteorologia m in meteorologias)
             {
@@ -83,7 +83,7 @@ namespace MvcSolar.Data
             }
             var utilizadores = new Utilizador[]
             {
-                new Utilizador{UtilizadorId=1,Email="email@gmail.com",Nome="Alexandre Silva",Password="passwordfixolas",LastTimeOnline=DateTime.Parse("01/04/2021"),Username="alexandresilva"}
+                new Utilizador{Email="email@gmail.com",Nome="Alexandre Silva",Password="passwordfixolas",LastTimeOnline=DateTime.Parse("01/04/2021"),Username="alexandresilva"}
 
             };
 
@@ -100,7 +100,7 @@ namespace MvcSolar.Data
             }
             var eventos = new Evento[]
             {
-                new Evento{EventoId=1,Data=DateTime.Parse("18/04/2000"),DataFinal=DateTime.Parse("21/04/2000"),}
+                new Evento{Data=DateTime.Parse("18/04/2000"),DataFinal=DateTime.Parse("21/04/2000"),}
             };
             foreach (Evento e in eventos)
             {
@@ -117,7 +117,7 @@ namespace MvcSolar.Data
             }
             var funcionarios = new Funcionario[]
             {
-                new Funcionario{funcionarioId=1,username="Anibal"}
+                new Funcionario{Username="Anibal"}
             };
             foreach (Funcionario e in funcionarios)
             {
@@ -132,7 +132,7 @@ namespace MvcSolar.Data
             }
             var lembretes = new Lembrete[]
             {
-                new Lembrete{LembreteID=1,dataHora=DateTime.Parse("01/01/2000"),EventoID=1,UtilizadorID=1}
+                new Lembrete{dataHora=DateTime.Parse("01/01/2000"),EventoID=1,UtilizadorID=1}
             };
             foreach (Lembrete l in lembretes)
             {
@@ -147,7 +147,7 @@ namespace MvcSolar.Data
             }
             var alertasUtilizador = new AlertasUtilizador[]
             {
-                new AlertasUtilizador{UtilizadorID=1}
+                new AlertasUtilizador{Tipo=Tipo.Manutencao,AlertasUtilizadorID=1}
             };
             foreach (AlertasUtilizador e in alertasUtilizador)
             {
@@ -163,7 +163,7 @@ namespace MvcSolar.Data
             }
             var manutencoes = new Manutencao[]
             {
-                new Manutencao{ManutencaoID=1,FuncionarioID=1,HabitacaoID=1,Data=DateTime.Parse("11/11/2011")}
+                new Manutencao{FuncionarioID=1,HabitacaoID=1,Data=DateTime.Parse("11/11/2011")}
             };
             foreach (Manutencao m in manutencoes)
             {
@@ -180,7 +180,7 @@ namespace MvcSolar.Data
 
             var habitacoes = new Habitacao[]
             {
-                new Habitacao{HabitacaoID = 1,Morada = "Rua do Alecrim",Latitude =0.00,Longitude=0.00,Bateria = 50.0, Capacidade = 100.0, LocalidadeID = 1  }
+                new Habitacao{Morada = "Rua do Alecrim",Latitude =0.00,Longitude=0.00,Bateria = 50.0, Capacidade = 100.0, LocalidadeID = 1  }
             };
             foreach(Habitacao e in habitacoes)
             {
@@ -197,7 +197,7 @@ namespace MvcSolar.Data
             }
             var paineis = new Painel[]
             {
-                new Painel{PainelID=1,HabitacaoID=1,ProducaoPrevistaHora=2.0,Modelo="modelo1",Estado=Estado.Ligado}
+                new Painel{HabitacaoID=1,ProducaoPrevistaHora=2.0,Modelo="modelo1",Estado=Estado.Ligado}
             };
             foreach (Painel p in paineis)
             {
@@ -244,7 +244,7 @@ namespace MvcSolar.Data
             }
             var avarias = new Avaria[]
             {
-                new Avaria{AvariaID = 1,HabitacaoID = 1,Data =DateTime.Parse("01/01/2000")}
+                new Avaria{HabitacaoID = 1,Data =DateTime.Parse("01/01/2000")}
             };
             foreach( Avaria a in avarias){
                 context.Avarias.Add(a);

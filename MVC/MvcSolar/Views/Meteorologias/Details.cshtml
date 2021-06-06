@@ -1,0 +1,48 @@
+﻿@model MvcSolar.Models.Meteorologia
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<h1>Details</h1>
+
+<div>
+    <h4>Meteorologia</h4>
+    <hr />
+    <dl class="row">
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.WeatherType)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.WeatherType)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.SkyCondition)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.SkyCondition)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.ProbPrecipitacao)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.ProbPrecipitacao)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Sunrise)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Sunrise)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Sunset)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Sunset)
+        </dd>
+    </dl>
+</div>
+<div>
+    <a asp-action="Edit" asp-route-id="@Model.MeteorologiaID">Edit</a> |
+    <a asp-action="Index">Back to List</a>
+</div>

@@ -8,6 +8,7 @@ namespace MvcSolar.Models
     public class ConsumoEnergetico
     {
         // props
+        public int ConsumoEnergeticoID { get; set; }
         public double Consumo { get; set; }
         public DateTime Data { get; set; }
         public int HabitacaoID { get; set; }
