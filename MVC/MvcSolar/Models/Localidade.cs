@@ -14,9 +14,8 @@ namespace MvcSolar.Models
         public string Nome { get; set; }
         public string Distrito { get; set; }
         public string Concelho { get; set; }
-        public Dictionary<DateTime,int> MeteorologiasID { get; set; }
+        public ICollection<Meteorologia> Meteorologias { get; set; }
 
         // nav props
-        public Meteorologia Meteorologia { get; set; }
     }
 }

@@ -5,16 +5,14 @@ using System.Threading.Tasks;
 
 namespace MvcSolar.Models
 {
-    public class Manutencao
+    public class Avaria
     {
         // props
-        public int ManutencaoID { get; set; }
-        public int FuncionarioID { get; set; }
+        public int AvariaID { get; set; }
         public int HabitacaoID { get; set; }
         public DateTime Data { get; set; }
 
         // nav props
-        public Funcionario Funcionario { get; set; }
         public Habitacao Habitacao { get; set; }
     }
 }

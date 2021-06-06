@@ -5,15 +5,15 @@ namespace MvcSolar.Models
 {
     public class Evento
     {
-        public int Id { get; set; }
+        public int EventoId { get; set; }
 
         [DataType(DataType.Date)]
-        public DateTime Date { get; set; }
+        public DateTime Data { get; set; }
 
         [DataType(DataType.Date)]
-        public DateTime FinalDate { get; set; }
+        public DateTime DataFinal { get; set; }
 
-        public string Name { get; set; }
-        public string Description { get; set; }
+        public string Nome { get; set; }
+        public string Descricao { get; set; }
     }
 }
