@@ -8,13 +8,19 @@ namespace MvcSolar.Models
 {
     public class Painel
     {
-        public int ID { get; set; }
+        // pops
+        public int PainelID { get; set; }
         public double ProducaoPrevistaHora { get; set; }
         public string Marca { get; set; }
-        public int Estado { get; set; } // 0-Ligado, 1-Desligado, 2-Avariado
+        public Estado Estado { get; set; }
 
         [DataType(DataType.Date)]
         public DateTime Data { get; set; }
-        public List<ProducaoEnergetica> Producoes { get; set; }
+
+        public Dictionary<DateTime,int> ProducoesID { get; set; }
+
+        // nav props
+        public ProducaoEnergetica Producoes { get; set; }
+
     }
 }

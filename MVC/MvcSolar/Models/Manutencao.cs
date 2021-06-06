@@ -7,6 +7,6 @@ namespace MvcSolar.Models
 {
     public class Manutencao
     {
-        public int ID { get; set; }
+        public int ManutencaoID { get; set; }
     }
 }

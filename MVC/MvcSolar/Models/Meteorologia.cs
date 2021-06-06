@@ -8,7 +8,8 @@ namespace MvcSolar.Models
 {
     public class Meteorologia
     {
-        public int ID { get; set; } // data que acontece & localização
+        // props
+        public int MeteorologiaID { get; set; } // data que acontece & localização
         public string WeatherType { get; set; }
         public string SkyCondition { get; set; }
         public double ProbPrecipitacao { get; set; }
@@ -18,5 +19,7 @@ namespace MvcSolar.Models
 
         [DataType(DataType.Date)]
         public DateTime Sunset { get; set; }
+         
+        // nav props
     }
 }

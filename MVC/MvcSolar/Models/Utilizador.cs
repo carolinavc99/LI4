@@ -8,7 +8,8 @@ namespace MvcSolar.Models
 {
     public class Utilizador
     {
-        public int Id { get; set; }
+        // props
+        public int UtilizadorId { get; set; }
         public string Email { get; set; }
         public string Nome { get; set; }
         public string Password { get; set; }
@@ -16,9 +17,13 @@ namespace MvcSolar.Models
         [DataType(DataType.Date)]
         public DateTime LastTimeOnline { get; set; }
         public string Username { get; set; }
-        public Habitacao Habitacao { get; set; }
-        public Dictionary<int,Evento> Eventos { get; set; }
+        public int HabitacaoID { get; set; }
+        public Dictionary<int,int> EventosID { get; set; }        
         public Tipo NotificacoesLigadas { get; set; }
-       
+
+        // nav props
+        public Habitacao Habitacao { get; set; }
+        public Evento Eventos { get; set; }
+
     }
 }

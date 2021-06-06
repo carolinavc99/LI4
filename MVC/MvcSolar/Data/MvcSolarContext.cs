@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using MvcSolar.Models;
 
+
 namespace MvcSolar.Data
 {
     public class MvcSolarContext : DbContext
@@ -30,12 +31,22 @@ namespace MvcSolar.Data
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<Evento>().ToTable("Evento");
-            modelBuilder.Entity<Habitacao>().ToTable("Habitação");
-            modelBuilder.Entity<Localidade>().ToTable("Localidade");
+            /* 
+             Algumas destas tabelas podem ser excluídas - o EF cria tabelas para todas as entidades que são referenciadas
+             ou seja iincluir só o utilizador o EF ia gerar Habitação também porque o utilizador precisa dela 
+            */
+
+            modelBuilder.Entity<Alerta>().ToTable("Alertas");
+            modelBuilder.Entity<ConsumoEnergetico>().ToTable("Consumos Energéticos");
+            modelBuilder.Entity<Evento>().ToTable("Eventos");
+            modelBuilder.Entity<Funcionario>().ToTable("Funcionários");
+            modelBuilder.Entity<Habitacao>().ToTable("Habitações");
+            modelBuilder.Entity<Lembrete>().ToTable("Lembretes");
+            modelBuilder.Entity<Localidade>().ToTable("Localidades");
+            modelBuilder.Entity<Manutencao>().ToTable("Manutenções");
             modelBuilder.Entity<Meteorologia>().ToTable("Meteorologia");
-            modelBuilder.Entity<Painel>().ToTable("Painel");
-            modelBuilder.Entity<Utilizador>().ToTable("Utilizador");
+            modelBuilder.Entity<Painel>().ToTable("Painéis");
+            modelBuilder.Entity<Utilizador>().ToTable("Utilizadores");
         }
     }
 }

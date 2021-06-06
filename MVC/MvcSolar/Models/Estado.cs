@@ -5,9 +5,10 @@ using System.Threading.Tasks;
 
 namespace MvcSolar.Models
 {
-    public class Funcionario : Utilizador
+    public enum Estado
     {
-        //nav properties
-        public Dictionary<DateTime,Manutencao> Manutencoes { get; set; }
+        Ligado,
+        Desligado,
+        Avariado
     }
 }
