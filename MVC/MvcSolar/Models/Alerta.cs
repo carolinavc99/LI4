@@ -7,6 +7,7 @@ namespace MvcSolar.Models
 {
     public class Alerta
     {
+        public int alertaId;
         public DateTime DataHora { get; set; }
         public string Descricao { get; set; }
         public string Sugestoes { get; set; }

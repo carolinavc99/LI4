@@ -17,13 +17,14 @@ namespace MvcSolar.Models
         [DataType(DataType.Date)]
         public DateTime LastTimeOnline { get; set; }
         public string Username { get; set; }
-        public int HabitacaoID { get; set; }
-        public Dictionary<int,int> EventosID { get; set; }        
-        public Tipo NotificacoesLigadas { get; set; }
 
         // nav props
-        public Habitacao Habitacao { get; set; }
-        public Evento Eventos { get; set; }
+
+        public ICollection<Lembrete> lembretes;
+        public ICollection<Tipo> alertas_ativados;
+
+        
+        
 
     }
 }
