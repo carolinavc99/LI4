@@ -123,7 +123,7 @@ namespace MvcSolar.Controllers
         }
 
         // GET: ConsumoEnergeticos/Delete/5
-        public async Task<IActionResult> Delete(int? id)
+        public async Task<IActionResult> Delete(int? id, bool? saveChangesError=false)
         {
             if (id == null)
             {
@@ -131,13 +131,18 @@ namespace MvcSolar.Controllers
             }
 
             var consumoEnergetico = await _context.ConsumosEnergeticos
+                .AsNoTracking()
                 .Include(c => c.Habitacao)
                 .FirstOrDefaultAsync(m => m.ConsumoEnergeticoID == id);
             if (consumoEnergetico == null)
             {
                 return NotFound();
             }
-
+            if (saveChangesError.GetValueOrDefault())
+            {
+                ViewData["ErrorMessage"] =
+                    "Apagar falhou. Tente outra vez, e se o problema persistir, contacte o administrador.";
+            }
             return View(consumoEnergetico);
         }
 
@@ -147,9 +152,19 @@ namespace MvcSolar.Controllers
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
             var consumoEnergetico = await _context.ConsumosEnergeticos.FindAsync(id);
+            if (consumoEnergetico == null)
+            {
+                return RedirectToAction(nameof(Index));
+            }
+            try {
             _context.ConsumosEnergeticos.Remove(consumoEnergetico);
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
+            }
+            catch (DbUpdateException)
+            {
+                return RedirectToAction(nameof(Delete), new { id = id, saveChangesError = true });
+            }
         }
 
         private bool ConsumoEnergeticoExists(int id)

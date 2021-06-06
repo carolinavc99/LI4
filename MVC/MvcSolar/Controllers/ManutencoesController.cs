@@ -128,7 +128,7 @@ namespace MvcSolar.Controllers
         }
 
         // GET: Manutencoes/Delete/5
-        public async Task<IActionResult> Delete(int? id)
+        public async Task<IActionResult> Delete(int? id, bool? saveChangesError=false)
         {
             if (id == null)
             {
@@ -136,12 +136,18 @@ namespace MvcSolar.Controllers
             }
 
             var manutencao = await _context.Manutencoes
+                .AsNoTracking()
                 .Include(m => m.Funcionario)
                 .Include(m => m.Habitacao)
                 .FirstOrDefaultAsync(m => m.ManutencaoID == id);
             if (manutencao == null)
             {
                 return NotFound();
+            }
+            if (saveChangesError.GetValueOrDefault())
+            {
+                ViewData["ErrorMessage"] =
+                    "Apagar falhou. Tente outra vez, e se o problema persistir, contacte o administrador.";
             }
 
             return View(manutencao);
@@ -153,9 +159,19 @@ namespace MvcSolar.Controllers
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
             var manutencao = await _context.Manutencoes.FindAsync(id);
-            _context.Manutencoes.Remove(manutencao);
-            await _context.SaveChangesAsync();
-            return RedirectToAction(nameof(Index));
+            if (manutencao == null)
+            {
+                return RedirectToAction(nameof(Index));
+            }
+            try
+            {
+                _context.Manutencoes.Remove(manutencao);
+                await _context.SaveChangesAsync();
+                return RedirectToAction(nameof(Index));
+            } catch (DbUpdateException)
+            {
+                return RedirectToAction(nameof(Delete), new { id = id, saveChangesError = true });
+            }
         }
 
         private bool ManutencaoExists(int id)

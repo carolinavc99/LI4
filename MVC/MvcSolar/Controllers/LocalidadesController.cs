@@ -117,7 +117,7 @@ namespace MvcSolar.Controllers
         }
 
         // GET: Localidades/Delete/5
-        public async Task<IActionResult> Delete(int? id)
+        public async Task<IActionResult> Delete(int? id, bool? saveChangesError = false)
         {
             if (id == null)
             {
@@ -125,10 +125,16 @@ namespace MvcSolar.Controllers
             }
 
             var localidade = await _context.Localidades
+                .AsNoTracking()
                 .FirstOrDefaultAsync(m => m.LocalidadeID == id);
             if (localidade == null)
             {
                 return NotFound();
+            }
+            if (saveChangesError.GetValueOrDefault())
+            {
+                ViewData["ErrorMessage"] =
+                    "Apagar falhou. Tente outra vez, e se o problema persistir, contacte o administrador.";
             }
 
             return View(localidade);
@@ -140,9 +146,19 @@ namespace MvcSolar.Controllers
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
             var localidade = await _context.Localidades.FindAsync(id);
-            _context.Localidades.Remove(localidade);
-            await _context.SaveChangesAsync();
-            return RedirectToAction(nameof(Index));
+            if (localidade == null)
+            {
+                return RedirectToAction(nameof(Index));
+            }
+
+            try {
+                _context.Localidades.Remove(localidade);
+                await _context.SaveChangesAsync();
+                return RedirectToAction(nameof(Index));
+            } catch (DbUpdateException)
+            {
+                return RedirectToAction(nameof(Delete), new { id = id, saveChangesError = true });
+            }
         }
 
         private bool LocalidadeExists(int id)

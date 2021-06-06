@@ -117,7 +117,7 @@ namespace MvcSolar.Controllers
         }
 
         // GET: Meteorologias/Delete/5
-        public async Task<IActionResult> Delete(int? id)
+        public async Task<IActionResult> Delete(int? id, bool? saveChangesError = false)
         {
             if (id == null)
             {
@@ -125,10 +125,16 @@ namespace MvcSolar.Controllers
             }
 
             var meteorologia = await _context.Meteorologias
+                .AsNoTracking()
                 .FirstOrDefaultAsync(m => m.MeteorologiaID == id);
             if (meteorologia == null)
             {
                 return NotFound();
+            }
+            if (saveChangesError.GetValueOrDefault())
+            {
+                ViewData["ErrorMessage"] =
+                    "Apagar falhou. Tente outra vez, e se o problema persistir, contacte o administrador.";
             }
 
             return View(meteorologia);
@@ -140,9 +146,20 @@ namespace MvcSolar.Controllers
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
             var meteorologia = await _context.Meteorologias.FindAsync(id);
-            _context.Meteorologias.Remove(meteorologia);
-            await _context.SaveChangesAsync();
-            return RedirectToAction(nameof(Index));
+            if (meteorologia == null)
+            {
+                return RedirectToAction(nameof(Index));
+            }
+            try
+            {
+                _context.Meteorologias.Remove(meteorologia);
+                await _context.SaveChangesAsync();
+                return RedirectToAction(nameof(Index));
+            }
+            catch (DbUpdateException)
+            {
+                return RedirectToAction(nameof(Delete), new { id = id, saveChangesError = true });
+            }
         }
 
         private bool MeteorologiaExists(int id)

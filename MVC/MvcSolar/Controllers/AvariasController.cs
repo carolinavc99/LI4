@@ -123,7 +123,7 @@ namespace MvcSolar.Controllers
         }
 
         // GET: Avarias/Delete/5
-        public async Task<IActionResult> Delete(int? id)
+        public async Task<IActionResult> Delete(int? id, bool? saveChangesError=false)
         {
             if (id == null)
             {
@@ -131,11 +131,17 @@ namespace MvcSolar.Controllers
             }
 
             var avaria = await _context.Avarias
+                .AsNoTracking()
                 .Include(a => a.Habitacao)
                 .FirstOrDefaultAsync(m => m.AvariaID == id);
             if (avaria == null)
             {
                 return NotFound();
+            }
+            if (saveChangesError.GetValueOrDefault())
+            {
+                ViewData["ErrorMessage"] =
+                    "Apagar falhou. Tente outra vez, e se o problema persistir, contacte o administrador.";
             }
 
             return View(avaria);
@@ -147,9 +153,20 @@ namespace MvcSolar.Controllers
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
             var avaria = await _context.Avarias.FindAsync(id);
-            _context.Avarias.Remove(avaria);
-            await _context.SaveChangesAsync();
-            return RedirectToAction(nameof(Index));
+            if (avaria == null)
+            {
+                return RedirectToAction(nameof(Index));
+            }
+            try
+            {
+                _context.Avarias.Remove(avaria);
+                await _context.SaveChangesAsync();
+                return RedirectToAction(nameof(Index));
+            }
+            catch (DbUpdateException)
+            {
+                return RedirectToAction(nameof(Delete), new { id = id, saveChangesError = true });
+            }
         }
 
         private bool AvariaExists(int id)

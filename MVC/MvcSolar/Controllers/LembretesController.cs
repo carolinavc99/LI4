@@ -128,7 +128,7 @@ namespace MvcSolar.Controllers
         }
 
         // GET: Lembretes/Delete/5
-        public async Task<IActionResult> Delete(int? id)
+        public async Task<IActionResult> Delete(int? id, bool? saveChangesError=false)
         {
             if (id == null)
             {
@@ -136,12 +136,18 @@ namespace MvcSolar.Controllers
             }
 
             var lembrete = await _context.Lembretes
+                .AsNoTracking()
                 .Include(l => l.Evento)
                 .Include(l => l.Utilizador)
                 .FirstOrDefaultAsync(m => m.LembreteID == id);
             if (lembrete == null)
             {
                 return NotFound();
+            }
+            if (saveChangesError.GetValueOrDefault())
+            {
+                ViewData["ErrorMessage"] =
+                    "Apagar falhou. Tente outra vez, e se o problema persistir, contacte o administrador.";
             }
 
             return View(lembrete);
@@ -153,9 +159,20 @@ namespace MvcSolar.Controllers
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
             var lembrete = await _context.Lembretes.FindAsync(id);
+            if (lembrete == null)
+            {
+                return RedirectToAction(nameof(Index));
+            }
+
+            try {
             _context.Lembretes.Remove(lembrete);
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
+            }
+            catch (DbUpdateException)
+            {
+                return RedirectToAction(nameof(Delete), new { id = id, saveChangesError = true });
+            }
         }
 
         private bool LembreteExists(int id)

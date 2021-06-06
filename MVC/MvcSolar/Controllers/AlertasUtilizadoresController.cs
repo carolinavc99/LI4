@@ -123,7 +123,7 @@ namespace MvcSolar.Controllers
         }
 
         // GET: AlertasUtilizadores/Delete/5
-        public async Task<IActionResult> Delete(int? id)
+        public async Task<IActionResult> Delete(int? id, bool? saveChangesError=false)
         {
             if (id == null)
             {
@@ -131,11 +131,18 @@ namespace MvcSolar.Controllers
             }
 
             var alertasUtilizador = await _context.AlertasUtilizadores
+                .AsNoTracking()
                 .Include(a => a.Utilizador)
                 .FirstOrDefaultAsync(m => m.AlertasUtilizadorID == id);
             if (alertasUtilizador == null)
             {
                 return NotFound();
+            }
+
+            if (saveChangesError.GetValueOrDefault())
+            {
+                ViewData["ErrorMessage"] =
+                    "Apagar falhou. Tente outra vez, e se o problema persistir, contacte o administrador.";
             }
 
             return View(alertasUtilizador);
@@ -147,9 +154,21 @@ namespace MvcSolar.Controllers
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
             var alertasUtilizador = await _context.AlertasUtilizadores.FindAsync(id);
-            _context.AlertasUtilizadores.Remove(alertasUtilizador);
-            await _context.SaveChangesAsync();
-            return RedirectToAction(nameof(Index));
+            if (alertasUtilizador == null)
+            {
+                return RedirectToAction(nameof(Index));
+            }
+
+            try
+            {
+                _context.AlertasUtilizadores.Remove(alertasUtilizador);
+                await _context.SaveChangesAsync();
+                return RedirectToAction(nameof(Index));
+            }
+            catch (DbUpdateException)
+            {
+                return RedirectToAction(nameof(Delete), new { id = id, saveChangesError = true });
+            }
         }
 
         private bool AlertasUtilizadorExists(int id)

@@ -123,7 +123,7 @@ namespace MvcSolar.Controllers
         }
 
         // GET: Paineis/Delete/5
-        public async Task<IActionResult> Delete(int? id)
+        public async Task<IActionResult> Delete(int? id, bool? saveChangesError = false)
         {
             if (id == null)
             {
@@ -131,11 +131,17 @@ namespace MvcSolar.Controllers
             }
 
             var painel = await _context.Paineis
+                .AsNoTracking()
                 .Include(p => p.Habitacao)
                 .FirstOrDefaultAsync(m => m.PainelID == id);
             if (painel == null)
             {
                 return NotFound();
+            }
+            if (saveChangesError.GetValueOrDefault())
+            {
+                ViewData["ErrorMessage"] =
+                    "Apagar falhou. Tente outra vez, e se o problema persistir, contacte o administrador.";
             }
 
             return View(painel);
@@ -147,9 +153,20 @@ namespace MvcSolar.Controllers
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
             var painel = await _context.Paineis.FindAsync(id);
-            _context.Paineis.Remove(painel);
-            await _context.SaveChangesAsync();
-            return RedirectToAction(nameof(Index));
+            if (painel == null)
+            {
+                return RedirectToAction(nameof(Index));
+            }
+            try
+            {
+                _context.Paineis.Remove(painel);
+                await _context.SaveChangesAsync();
+                return RedirectToAction(nameof(Index));
+            }
+            catch (DbUpdateException)
+            {
+                return RedirectToAction(nameof(Delete), new { id = id, saveChangesError = true });
+            }
         }
 
         private bool PainelExists(int id)

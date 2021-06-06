@@ -20,9 +20,34 @@ namespace MvcSolar.Controllers
         }
 
         // GET: Eventos
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(string sortOrder, string searchString)
         {
-            return View(await _context.Eventos.ToListAsync());
+            ViewData["NameSortParm"] = String.IsNullOrEmpty(sortOrder) ? "name_desc" : "";
+            ViewData["DateSortParm"] = sortOrder == "Date" ? "data_desc" : "Date";
+            ViewData["CurrentFilter"] = searchString;
+
+            var eventos = from s in _context.Eventos
+                           select s;
+            if (!String.IsNullOrEmpty(searchString))
+            {
+                eventos = eventos.Where(s => s.Nome.Contains(searchString));
+            }
+            switch (sortOrder)
+            {
+                case "nome_desc":
+                    eventos = eventos.OrderByDescending(s => s.Nome);
+                    break;
+                case "Data":
+                    eventos = eventos.OrderBy(s => s.Data);
+                    break;
+                case "data_desc":
+                    eventos = eventos.OrderByDescending(s => s.Data);
+                    break;
+                default:
+                    eventos = eventos.OrderBy(s => s.Nome);
+                    break;
+            }
+            return View(await eventos.AsNoTracking().ToListAsync());
         }
 
         // GET: Eventos/Details/5
@@ -117,7 +142,7 @@ namespace MvcSolar.Controllers
         }
 
         // GET: Eventos/Delete/5
-        public async Task<IActionResult> Delete(int? id)
+        public async Task<IActionResult> Delete(int? id, bool? saveChangesError=false)
         {
             if (id == null)
             {
@@ -125,10 +150,16 @@ namespace MvcSolar.Controllers
             }
 
             var evento = await _context.Eventos
+                .AsNoTracking()
                 .FirstOrDefaultAsync(m => m.EventoId == id);
             if (evento == null)
             {
                 return NotFound();
+            }
+            if (saveChangesError.GetValueOrDefault())
+            {
+                ViewData["ErrorMessage"] =
+                    "Apagar falhou. Tente outra vez, e se o problema persistir, contacte o administrador.";
             }
 
             return View(evento);
@@ -140,9 +171,18 @@ namespace MvcSolar.Controllers
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
             var evento = await _context.Eventos.FindAsync(id);
+            if (evento == null)
+            {
+                return RedirectToAction(nameof(Index));
+            }
+            try {
             _context.Eventos.Remove(evento);
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
+            } catch (DbUpdateException)
+            {
+                return RedirectToAction(nameof(Delete), new { id = id, saveChangesError = true });
+            }
         }
 
         private bool EventoExists(int id)

@@ -117,7 +117,7 @@ namespace MvcSolar.Controllers
         }
 
         // GET: Alertas/Delete/5
-        public async Task<IActionResult> Delete(int? id)
+        public async Task<IActionResult> Delete(int? id, bool? saveChangesError = false)
         {
             if (id == null)
             {
@@ -125,10 +125,17 @@ namespace MvcSolar.Controllers
             }
 
             var alerta = await _context.Alertas
+                .AsNoTracking()
                 .FirstOrDefaultAsync(m => m.AlertaId == id);
             if (alerta == null)
             {
                 return NotFound();
+            }
+
+            if (saveChangesError.GetValueOrDefault())
+            {
+                ViewData["ErrorMessage"] =
+                    "Apagar falhou. Tente outra vez, e se o problema persistir, contacte o administrador.";
             }
 
             return View(alerta);
@@ -140,9 +147,20 @@ namespace MvcSolar.Controllers
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
             var alerta = await _context.Alertas.FindAsync(id);
-            _context.Alertas.Remove(alerta);
-            await _context.SaveChangesAsync();
-            return RedirectToAction(nameof(Index));
+            if (alerta == null)
+            {
+                return RedirectToAction(nameof(Index));
+            }
+            try
+            {
+                _context.Alertas.Remove(alerta);
+                await _context.SaveChangesAsync();
+                return RedirectToAction(nameof(Index));
+            }
+            catch (DbUpdateException)
+            {
+                return RedirectToAction(nameof(Delete), new { id = id, saveChangesError= true});
+            }
         }
 
         private bool AlertaExists(int id)

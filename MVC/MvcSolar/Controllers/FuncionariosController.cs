@@ -117,7 +117,7 @@ namespace MvcSolar.Controllers
         }
 
         // GET: Funcionarios/Delete/5
-        public async Task<IActionResult> Delete(int? id)
+        public async Task<IActionResult> Delete(int? id, bool? saveChangesError=false)
         {
             if (id == null)
             {
@@ -125,10 +125,16 @@ namespace MvcSolar.Controllers
             }
 
             var funcionario = await _context.Funcionarios
+                .AsNoTracking()
                 .FirstOrDefaultAsync(m => m.UtilizadorId == id);
             if (funcionario == null)
             {
                 return NotFound();
+            }
+            if (saveChangesError.GetValueOrDefault())
+            {
+                ViewData["ErrorMessage"] =
+                    "Apagar falhou. Tente outra vez, e se o problema persistir, contacte o administrador.";
             }
 
             return View(funcionario);
@@ -140,9 +146,19 @@ namespace MvcSolar.Controllers
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
             var funcionario = await _context.Funcionarios.FindAsync(id);
+            if (funcionario == null)
+            {
+                return RedirectToAction(nameof(Index));
+            }
+            try {
             _context.Funcionarios.Remove(funcionario);
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
+            }
+            catch (DbUpdateException)
+            {
+                return RedirectToAction(nameof(Delete), new { id = id, saveChangesError = true });
+            }
         }
 
         private bool FuncionarioExists(int id)

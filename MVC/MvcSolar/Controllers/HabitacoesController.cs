@@ -123,7 +123,7 @@ namespace MvcSolar.Controllers
         }
 
         // GET: Habitacoes/Delete/5
-        public async Task<IActionResult> Delete(int? id)
+        public async Task<IActionResult> Delete(int? id, bool? saveChangesError = false)
         {
             if (id == null)
             {
@@ -131,11 +131,17 @@ namespace MvcSolar.Controllers
             }
 
             var habitacao = await _context.Habitacoes
+                .AsNoTracking()
                 .Include(h => h.Localidade)
                 .FirstOrDefaultAsync(m => m.HabitacaoID == id);
             if (habitacao == null)
             {
                 return NotFound();
+            }
+            if (saveChangesError.GetValueOrDefault())
+            {
+                ViewData["ErrorMessage"] =
+                    "Apagar falhou. Tente outra vez, e se o problema persistir, contacte o administrador.";
             }
 
             return View(habitacao);
@@ -147,9 +153,19 @@ namespace MvcSolar.Controllers
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
             var habitacao = await _context.Habitacoes.FindAsync(id);
+            if (habitacao == null)
+            {
+                return RedirectToAction(nameof(Index));
+            }
+            try {
             _context.Habitacoes.Remove(habitacao);
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
+            }
+            catch (DbUpdateException)
+            {
+                return RedirectToAction(nameof(Delete), new { id = id, saveChangesError = true });
+            }
         }
 
         private bool HabitacaoExists(int id)
