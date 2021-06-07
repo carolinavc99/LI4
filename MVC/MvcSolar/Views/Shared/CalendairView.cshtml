@@ -13,9 +13,9 @@
             scheduler.init("scheduler_here", new Date(2021,3,18));
 
             // initiating data loading
-            scheduler.load("/Scheduler");
+            scheduler.load("api/SchedulerController");
             // initializing dataProcessor
-            var dp = new dataProcessor("/Scheduler");
+            var dp = new dataProcessor("api/SchedulerController");
             // and attaching it to scheduler
             dp.init(scheduler);
             // setting the REST mode for dataProcessor

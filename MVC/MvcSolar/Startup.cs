@@ -8,6 +8,9 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using System.Web.Http;
+using AspNetCoreHero.ToastNotification;
+using AspNetCoreHero.ToastNotification.Extensions;
 using Microsoft.EntityFrameworkCore;
 using MvcSolar.Data;
 
@@ -31,7 +34,9 @@ namespace MvcSolar
             services.AddDatabaseDeveloperPageExceptionFilter();
 
             services.AddControllersWithViews();
-            
+
+            services.AddNotyf(config => { config.DurationInSeconds = 6; config.IsDismissable = true; config.Position = NotyfPosition.BottomRight; });
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -50,16 +55,15 @@ namespace MvcSolar
             app.UseHttpsRedirection();
             app.UseStaticFiles();
 
+
             app.UseRouting();
 
             app.UseAuthorization();
 
+            app.UseNotyf();
+
             app.UseEndpoints(endpoints =>
             {
-                endpoints.MapControllerRoute(name: "Scheduler",
-                pattern: "Scheduler/{id?}",
-                defaults: new { controller = "Scheduler", action = "id" });
-
                 endpoints.MapControllerRoute(
                     name: "default",
                     pattern: "{controller=Funcionario}/{action=Index}/{id?}"); // routing format witht he defaults defined

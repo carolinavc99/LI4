@@ -1,66 +1,62 @@
-using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
-using System.Web;
+using System.Threading.Tasks;
 using System.Web.Http;
-
-
-using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Mvc;
 using MvcSolar.Data;
 using MvcSolar.Models;
+using EntityState = System.Data.Entity.EntityState;
 
 namespace MvcSolar.Controllers
 {
+    [Microsoft.AspNetCore.Mvc.Route("api/[controller]")]
+    [ApiController]
     public class SchedulerController : ApiController
     {
-
-
-
-        private MvcSolarContext db;
+        private readonly MvcSolarContext _context;
 
         public SchedulerController(MvcSolarContext context)
         {
-            db = context;
+            _context = context;
         }
 
-
-        // GET: api/scheduler
-        public IEnumerable<WebAPIEvent> Get()
+        // GET: api/SchedulerController
+        [Microsoft.AspNetCore.Mvc.HttpGet]
+        public IEnumerable<WebAPIEvent> GetEventos()
         {
-            return db.Eventos
-                .ToList()
-                .Select(e => (WebAPIEvent)e);
+            return _context.Eventos.ToList().Select(e => (WebAPIEvent) e);
+            ;
         }
 
-        
-        // GET: api/scheduler/5
-        public WebAPIEvent Get(int id)
+        // GET: api/SchedulerController/5
+        [Microsoft.AspNetCore.Mvc.HttpGet("{id}")]
+        public WebAPIEvent GetEvento(int id)
         {
-            return (WebAPIEvent)db.Eventos.Find(id);
+            return (WebAPIEvent) _context.Eventos.Find(id);
         }
-        
-        // PUT: api/scheduler/5
-        [HttpPut]
-        public IHttpActionResult EditSchedulerEvent(int id, WebAPIEvent webAPIEvent)
+
+        // PUT: api/SchedulerController/5
+        // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
+        [Microsoft.AspNetCore.Mvc.HttpPut("{id}")]
+        public IHttpActionResult PutEvento(int id, WebAPIEvent evento)
         {
-            var updatedSchedulerEvent = (Evento)webAPIEvent;
+            var updatedSchedulerEvent = (Evento) evento;
             updatedSchedulerEvent.EventoId = id;
-            db.Entry(updatedSchedulerEvent).State = EntityState.Modified;
-            db.SaveChanges();
+            _context.Entry(updatedSchedulerEvent).State = Microsoft.EntityFrameworkCore.EntityState.Modified;
+            _context.SaveChanges();
 
-            return Ok(new
-            {
-                action = "updated"
-            });
+            return Ok(new {action = "updated"});
         }
 
-        // POST: api/scheduler/5
-        [HttpPost]
-        public IHttpActionResult CreateSchedulerEvent(WebAPIEvent webAPIEvent)
+        // POST: api/SchedulerController
+        // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
+        [Microsoft.AspNetCore.Mvc.HttpPost]
+        public IHttpActionResult PostEvento(WebAPIEvent webAPIEvent)
         {
-            var newSchedulerEvent = (Evento)webAPIEvent;
-            db.Eventos.Add(newSchedulerEvent);
-            db.SaveChanges();
+            var newSchedulerEvent = (Evento) webAPIEvent;
+            _context.Eventos.Add(newSchedulerEvent);
+            _context.SaveChanges();
 
             return Ok(new
             {
@@ -69,15 +65,15 @@ namespace MvcSolar.Controllers
             });
         }
 
-        // DELETE: api/scheduler/5
-        [HttpDelete]
+        // DELETE: api/SchedulerController/5
+        [Microsoft.AspNetCore.Mvc.HttpDelete("{id}")]
         public IHttpActionResult DeleteSchedulerEvent(int id)
         {
-            var schedulerEvent = db.Eventos.Find(id);
+            var schedulerEvent = _context.Eventos.Find(id);
             if (schedulerEvent != null)
             {
-                db.Eventos.Remove(schedulerEvent);
-                db.SaveChanges();
+                _context.Eventos.Remove(schedulerEvent);
+                _context.SaveChanges();
             }
 
             return Ok(new
@@ -90,9 +86,14 @@ namespace MvcSolar.Controllers
         {
             if (disposing)
             {
-                db.Dispose();
+                _context.Dispose();
             }
             base.Dispose(disposing);
+        }
+
+        private bool EventoExists(int id)
+        {
+            return _context.Eventos.Any(e => e.EventoId == id);
         }
     }
 }

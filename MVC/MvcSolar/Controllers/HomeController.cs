@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using AspNetCoreHero.ToastNotification.Abstractions;
 
 namespace MvcSolar.Controllers
 {
@@ -10,6 +11,12 @@ namespace MvcSolar.Controllers
     {
         // 
         // GET: /Home/
+
+        private readonly INotyfService _notyf;
+        public HomeController(INotyfService notyf)
+        {
+            _notyf = notyf;
+        }
 
         public IActionResult Index()
         {
