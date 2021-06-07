@@ -35,7 +35,7 @@ namespace MvcSolar
 
             services.AddControllersWithViews();
 
-            services.AddNotyf(config => { config.DurationInSeconds = 6; config.IsDismissable = true; config.Position = NotyfPosition.BottomRight; });
+            services.AddNotyf(config => { config.DurationInSeconds = 30; config.IsDismissable = true; config.Position = NotyfPosition.BottomRight; });
 
         }
 
