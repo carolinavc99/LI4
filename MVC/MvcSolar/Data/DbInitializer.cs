@@ -177,11 +177,28 @@ namespace MvcSolar.Data
             }
             var habitacoes = new Habitacao[]
             {
-                new Habitacao{Morada = "Rua do Alecrim",Latitude =0.00,Longitude=0.00,Bateria = 50.0, Capacidade = 100.0, LocalidadeID = 1  },
-                new Habitacao{Morada = "Rua do Ferragial",Latitude =1.00,Longitude=1.00,Bateria = 50.0, Capacidade = 100.0, LocalidadeID = 2  },
-                new Habitacao{Morada = "Rua Marechal Saldanha",Latitude =2.00,Longitude=2.00,Bateria = 50.0, Capacidade = 100.0, LocalidadeID = 3  },
-                new Habitacao{Morada = "Rua do Ataíde",Latitude =3.00,Longitude=3.00,Bateria = 50.0, Capacidade = 100.0, LocalidadeID = 4  },
-                new Habitacao{Morada = "Rua do Zé",Latitude =4.00,Longitude=4.00,Bateria = 50.0, Capacidade = 100.0, LocalidadeID = 5  }
+                new Habitacao { Morada = "Rua do Alecrim",Latitude =0.00,Longitude=0.00,Bateria = 50.0, Capacidade = 100.0, LocalidadeID = 1  },
+                new Habitacao { Morada = "Rua do Ferragial",Latitude =1.00,Longitude=1.00,Bateria = 50.0, Capacidade = 100.0, LocalidadeID = 2  },
+                new Habitacao { Morada = "Rua Marechal Saldanha",Latitude =2.00,Longitude=2.00,Bateria = 50.0, Capacidade = 100.0, LocalidadeID = 3  },
+                new Habitacao { Morada = "Rua do Ataíde",Latitude =3.00,Longitude=3.00,Bateria = 50.0, Capacidade = 100.0, LocalidadeID = 4  },
+                new Habitacao { Morada = "Rua do Zé",Latitude =4.00,Longitude=4.00,Bateria = 50.0, Capacidade = 100.0, LocalidadeID = 5  },
+                new Habitacao { Morada= "9 Scott Road",Latitude=45.8551505,Longitude=40.1202884,Bateria=8.57,Capacidade=5.45,LocalidadeID=2},
+                new Habitacao { Morada= "10662 Larry Center",Latitude=57.5842033,Longitude=-3.8847449,Bateria=8.12,Capacidade=6.16,LocalidadeID=4},
+                new Habitacao { Morada= "069 Hauk Way",Latitude=10.763286,Longitude=-74.756499,Bateria=8.82,Capacidade=8.0,LocalidadeID=1},
+                new Habitacao { Morada = "46 Hagan Circle", Latitude = -34.5474534, Longitude = -58.5230816, Bateria = 7.39, Capacidade = 6.92, LocalidadeID = 2},
+                new Habitacao { Morada = "5 Hooker Place", Latitude = 51.209018, Longitude = 24.6980251, Bateria = 9.37, Capacidade = 9.62, LocalidadeID = 4},
+                new Habitacao { Morada = "9 Sheridan Street", Latitude = 14.279014, Longitude = -87.6568799, Bateria = 7.89, Capacidade = 8.38, LocalidadeID = 2},
+                new Habitacao { Morada = "3 Havey Place", Latitude = 59.3796798, Longitude = 28.1791333, Bateria = 6.1, Capacidade = 6.47, LocalidadeID = 3},
+                new Habitacao { Morada = "75185 Center Alley", Latitude = -7.6377209, Longitude = 110.3519867, Bateria = 7.21, Capacidade = 6.97, LocalidadeID = 2},
+                new Habitacao { Morada = "2277 Sunfield Trail", Latitude = 18.1166668, Longitude = 120.6999969, Bateria = 8.0, Capacidade = 6.99, LocalidadeID = 5},
+                new Habitacao { Morada = "8 Dapin Road", Latitude = 44.985613, Longitude = 20.1568773, Bateria = 8.12, Capacidade = 7.93, LocalidadeID = 5},
+                new Habitacao { Morada = "701 School Terrace", Latitude = 23.084122, Longitude = 114.382541, Bateria = 5.49, Capacidade = 7.76, LocalidadeID = 3},
+                new Habitacao { Morada = "4 Pankratz Trail", Latitude = 47.6914432, Longitude = 31.2759129, Bateria = 8.26, Capacidade = 8.18, LocalidadeID = 4},
+                new Habitacao { Morada = "63009 Pine View Lane", Latitude=36.0917434, Longitude = 140.1139616, Bateria = 6.21, Capacidade = 6.6, LocalidadeID = 5},
+                new Habitacao { Morada = "0 Barby Junction", Latitude = 37.1432384, Longitude = 9.7846002, Bateria = 9.37, Capacidade = 8.67, LocalidadeID = 2},
+                new Habitacao { Morada = "2 Leroy Court", Latitude = 41.9950451, Longitude = 21.3421041, Bateria = 7.88, Capacidade = 9.96, LocalidadeID = 4},
+                new Habitacao { Morada = "2950 Lien Pass", Latitude = 9.879065, Longitude = -84.081486, Bateria = 8.22, Capacidade = 7.87, LocalidadeID = 5},
+                new Habitacao { Morada = "33079 4th Road", Latitude = 34.326903, Longitude = 108.117456, Bateria = 9.65, Capacidade = 7.11, LocalidadeID = 5}
             };
             foreach (Habitacao e in habitacoes)
             {
