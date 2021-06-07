@@ -21,21 +21,20 @@
             <th>
                 @Html.DisplayNameFor(model => model.Habitacao)
             </th>
-            <th></th>
         </tr>
     </thead>
     <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Data)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Funcionario.UtilizadorId)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Habitacao.HabitacaoID)
-            </td>
+    @foreach (var item in Model) {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Data)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Funcionario.UtilizadorId)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Habitacao.HabitacaoID)
+                </td>
             <td>
                 <a asp-action="Edit" asp-route-id="@item.ManutencaoID">Editar</a> |
                 <a asp-action="Details" asp-route-id="@item.ManutencaoID">Detalhes</a> |

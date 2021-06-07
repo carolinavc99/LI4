@@ -37,7 +37,14 @@ namespace MvcSolar.Controllers
                     manutencoes = manutencoes.OrderByDescending(s => s.Data);
                     break;
             }
-            return View(await manutencoes.AsNoTracking().ToListAsync());
+            var lista = await manutencoes.ToListAsync();
+            foreach (Manutencao m in lista)
+            {
+                Console.WriteLine(m.HabitacaoID);
+                Console.WriteLine(m.FuncionarioID);
+            }
+
+            return View(await manutencoes.ToListAsync());
         }
 
         // GET: Manutencoes/Details/5
