@@ -32,6 +32,7 @@ namespace MvcSolar.Controllers
             return View(await mvcSolarContext.ToListAsync());
         }
 
+
         // GET: ConsumoEnergeticos/Details/5
         public async Task<IActionResult> Details(int? id)
         {
