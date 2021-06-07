@@ -11,7 +11,7 @@
     <header>
         <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
             <div class="container">
-                <a class="navbar-brand" asp-controller="Funcionario" asp-action="Index">Área do Funcionário</a>
+                <a class="navbar-brand" asp-controller="DashboardPaineis" asp-action="Index">Dashboard</a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
                         aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
@@ -20,6 +20,9 @@
                     <ul class="navbar-nav flex-grow-1">
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-controller="Calendair" asp-action="Index">Calendário</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Funcionario" asp-action="Index">Mapa</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-controller="Avarias" asp-action="Index">Avarias</a>
@@ -40,9 +43,6 @@
                             <a class="nav-link text-dark" asp-area="" asp-controller="Utilizadores" asp-action="Index">Utilizadores</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="DashboardPaineis" asp-action="Index">Dashboard</a>
-                        </li>
-                        <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-controller="Lembretes" asp-action="Index">Lembretes</a>
                         </li>
                     </ul>
@@ -58,7 +58,7 @@
 
     <footer class="border-top footer text-muted">
         <div class="container">
-            &copy; 2021 - SOL:AR - <a asp-area="" asp-controller="Funcionario" asp-action="Index">Área do Funcionário</a>
+            &copy; 2021 - SOL:AR - <a asp-area="" asp-controller="DashboardPaineis" asp-action="Index">Dashboard</a>
         </div>
     </footer>
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
