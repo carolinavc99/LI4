@@ -6,39 +6,39 @@
             margin: 0;
             padding: 0;
             overflow: hidden;
-            font-family: 'Segoe UI',Helvetica,Arial,Sans-Serif
+            font-family: 'Segoe UI', Helvetica, Arial, Sans-Serif
         }
     </style>
 </head>
 <body scroll="yes" style="overflow: scroll">
 
 
-    <br />
+<br/>
 
-    <div class="row">
-        <div class="column">
-            <img src="Images/bateria.png" width="200" height="50" />
-        </div>
-        <div class="column" style="margin-left:30px">
-            <h2>Bateria: @ViewBag.dashboard.casa.Bateria Kw</h2>
-        </div>
-        <div class="column" style="margin-left:50px">
-            <img src="Images/producao.png" width="50" height="50" />
-        </div>
-        <div class="column" style="margin-left:30px">
-            <h2>Producao Atual: @ViewBag.dashboard.prodAtual Kw/h</h2>
-        </div>
+<div class="row">
+    <div class="column">
+        <img src="@Url.Content("~/Images/bateria.png")" width="200" height="50"/>
     </div>
+    <div class="column" style="margin-left: 30px">
+        <h2>Bateria: @ViewBag.dashboard.casa.Bateria Kw</h2>
+    </div>
+    <div class="column" style="margin-left: 50px">
+        <img src=@Url.Content("~/Images/producao.png")" width="50" height="50"/>
+    </div>
+    <div class="column" style="margin-left: 30px">
+        <h2>Producao Atual: @ViewBag.dashboard.prodAtual Kw/h</h2>
+    </div>
+</div>
 
 
-    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
 
-    <div id="chart_div" style="width: 900px; height: 500px;"></div>
+<div id="chart_div" style="width: 900px; height: 500px;"></div>
 
-    <script type="text/javascript">
+<script type="text/javascript">
 
 
-    google.charts.load('current', {packages: ['corechart', 'bar']});
+    google.charts.load('current', { packages: ['corechart', 'bar'] });
     google.charts.setOnLoadCallback(CarregaDados);
 
     function CarregaDados() {
@@ -62,9 +62,10 @@
         var dataArray = [
             ['Data', 'Consumo']
         ];
-        $.each(data, function(i, item) {
-            dataArray.push([item.data, item.consumo]);
-        });
+        $.each(data,
+            function(i, item) {
+                dataArray.push([item.data, item.consumo]);
+            });
         var data = google.visualization.arrayToDataTable(dataArray);
         var options = {
             title: 'Consumo Energetico',
@@ -84,46 +85,36 @@
         chart.draw(data, options);
         return false;
     }
-    </script>
+</script>
 
 
-    @{
+@{
+    <br/>
 
-
-
-        <br />
-
-        <br />
-        <br />
-
-
-
-
-        @foreach (var painel in ViewBag.dashboard.paineis)
-        {
-
-            <div class="row">
-                <div class="column">
-                    <img src="Images/download.png" width="150" height="150" />
-                </div>
-
-
-
-                <div class="column" style="margin-left:50px">
-                    <h3>Id: @painel.PainelID</h3>
-                    <h3>Producao prevista: @painel.ProducaoPrevistaHora Kw/h</h3>
-                    <h3>Modelo: @painel.Modelo</h3>
-                    <h3>Estado: @painel.Estado</h3>
-                </div>
+    <br/>
+    <br/>
+    @foreach (var painel in ViewBag.dashboard.paineis)
+    {
+        <div class="row">
+            <div class="column">
+                <img src="~/Images/download.png" width="150" height="150"/>
             </div>
 
-            <br />
 
-        }
+            <div class="column" style="margin-left: 50px">
+                <h3>Id: @painel.PainelID</h3>
+                <h3>Producao prevista: @painel.ProducaoPrevistaHora Kw/h</h3>
+                <h3>Modelo: @painel.Modelo</h3>
+                <h3>Estado: @painel.Estado</h3>
+            </div>
+        </div>
+
+        <br/>
     }
+}
 
-    <br />
-    <br />
-    <br />
+<br/>
+<br/>
+<br/>
 
 </body>
