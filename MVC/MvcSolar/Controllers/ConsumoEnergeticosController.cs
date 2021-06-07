@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using MvcSolar.Data;
 using MvcSolar.Models;
+using MvcSolar.Services;
 
 namespace MvcSolar.Controllers
 {
@@ -19,6 +20,11 @@ namespace MvcSolar.Controllers
             _context = context;
         }
 
+        public JsonResult ConsumoEnergeticoGrafico()
+        {
+            var listaPopulacao = ConsumoEnergeticosService.GetConsumoEnergeticos();
+            return Json(listaPopulacao);
+        }
         // GET: ConsumoEnergeticos
         public async Task<IActionResult> Index()
         {
