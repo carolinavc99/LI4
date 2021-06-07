@@ -29,7 +29,7 @@ namespace MvcSolar
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddDbContext<MvcSolarContext>(options =>
-                    options.UseSqlServer(Configuration.GetConnectionString("MvcSolarContext")));
+                    options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
 
             services.AddDatabaseDeveloperPageExceptionFilter();
 
@@ -66,7 +66,7 @@ namespace MvcSolar
             {
                 endpoints.MapControllerRoute(
                     name: "default",
-                    pattern: "{controller=Funcionario}/{action=Index}/{id?}"); // routing format witht he defaults defined
+                    pattern: "{controller=Home}/{action=Welcome}/{id?}"); // routing format witht he defaults defined
                     
             });
         }

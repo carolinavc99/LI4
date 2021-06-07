@@ -35,10 +35,6 @@ namespace MvcSolar.Data
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            /* 
-             Algumas destas tabelas podem ser excluídas - o EF cria tabelas para todas as entidades que são referenciadas
-             ou seja iincluir só o utilizador o EF ia gerar Habitação também porque o utilizador precisa dela 
-            */
             
             modelBuilder.Entity<Alerta>().ToTable("Alerta");
             modelBuilder.Entity<AlertasUtilizador>().ToTable("AlertasUtilizador");
